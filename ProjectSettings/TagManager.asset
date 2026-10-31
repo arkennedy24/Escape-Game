@@ -10,6 +10,7 @@ TagManager:
   - CrowBar
   - Cheese
   - BlackLight
+  - Square
   layers:
   - Default
   - TransparentFX

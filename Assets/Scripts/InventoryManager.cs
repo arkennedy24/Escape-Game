@@ -4,13 +4,18 @@ using TMPro;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+// InventoryManager handles the inventory system, including collecting, using, and removing items, and updating the UI accordingly.
+
 public class InventoryManager : MonoBehaviour
 {
-    // public TMP_Text[] Inventory_Slot_Texts;
+    // public TMP_Text[] Inventory_Slot_Texts; // keeping this for potential future use
     public TMP_Text[] Inventory_Slot_TextNumbers;
     public Image[] Inventory_Slot_Icons;
     public Sprite[] Inventory_Slot_Sprites;
     public Sprite emptySprite;
+    public TMP_Text Message;
+    public Image MessageBackground;
+
     [System.Serializable]
     // Custom class to represent an inventory item
     public class InventoryItem
@@ -25,16 +30,49 @@ public class InventoryManager : MonoBehaviour
             quantity = amount;
         }
     }
-    // 2. Create the list using custom class
+    
+    // Create the list using custom class
     public List<InventoryItem> inventory = new();
 
     // Handles the collection of an item and updates the inventory accordingly
     public void ItemCollect()
     {
-        Debug.Log(ButtonTag() + " collected");
-         AddItem(ButtonTag(), 1);
-         PrintInventory();
-         UpdateInventoryUI();
+        if (string.IsNullOrEmpty(ButtonTag()))
+        {
+            DisplayMessage("No button tag found");
+            Debug.Log("No button tag found");
+            return;
+        }
+        else {
+            if (inventory.Find(item => item.itemName == ButtonTag()) != null)
+            {
+                Debug.Log(ButtonTag() + " collected");
+                AddItem(ButtonTag(), 1);
+                TurnOffItem();
+                PrintInventory();
+                UpdateInventoryUI();
+                return;
+            }
+            else{
+                if (inventory.Count >= 6)
+                {
+                    DisplayMessage("Inventory is full");
+                    Debug.Log("Inventory is full");
+                    return;
+                }
+                else
+                {
+                    Debug.Log(ButtonTag() + " collected");
+                    AddItem(ButtonTag(), 1);
+                    TurnOffItem();
+                    PrintInventory();
+                    UpdateInventoryUI();
+                    return;
+                }
+            }
+        }
+    
+        
     }
 
     // Handles the use of an item from the inventory
@@ -45,11 +83,13 @@ public class InventoryManager : MonoBehaviour
         int itemIndex = int.Parse(ButtonName());
         if (inventory.Count < itemIndex)
         {
+            DisplayMessage("No item found");
             Debug.Log("Item index out of range");
             return;
         }
         else if (inventory[itemIndex - 1].quantity <= 0 || inventory[itemIndex - 1] == null)
         {
+            DisplayMessage("Item is out of stock or null");
             Debug.Log("Item is out of stock or null");
             return;
         }
@@ -83,7 +123,7 @@ public class InventoryManager : MonoBehaviour
     {
         for (int i = 0; i < 6; i++)
         {
-            // Inventory_Slot_Texts[i].text = inventory.Count > i ? inventory[i].itemName : "";
+            // Inventory_Slot_Texts[i].text = inventory.Count > i ? inventory[i].itemName : ""; // keeping this for potential future use
             Inventory_Slot_TextNumbers[i].text = inventory.Count > i ? inventory[i].quantity.ToString() : "0";
             NewImage(inventory.Count > i ? GetSpriteForItem(inventory[i].itemName) : emptySprite, i + 1);
         }
@@ -102,7 +142,19 @@ public class InventoryManager : MonoBehaviour
         return null;
     }
 
-// Helper method to get the name of the button that was clicked
+    // Turns off the item that was clicked
+    public void TurnOffItem()
+    {
+        GameObject clickedButton = EventSystem.current.currentSelectedGameObject;
+        Debug.Log("Turning off item: " + clickedButton.name);
+        clickedButton.SetActive(false);
+        // if (clickedButton != null)
+        // {
+        //     clickedButton.SetActive(false);
+        // }
+    }
+
+// Helper method to get the tag of the button that was clicked
     public string ButtonTag()
         {
             // Automatically fetches the name of the button that was clicked
@@ -110,6 +162,7 @@ public class InventoryManager : MonoBehaviour
             return clickedButton != null ? clickedButton.tag : string.Empty;
         }
     
+    // Helper method to get the name of the button that was clicked
     public string ButtonName()
     {
         GameObject clickedButton = EventSystem.current.currentSelectedGameObject;
@@ -149,13 +202,38 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-        void Start()
+    // Hides the message on the screen
+    public void HideMessage()
+    {
+        if (MessageBackground != null)
+        {
+            MessageBackground.gameObject.SetActive(false);
+        }
+    }
+    
+    // Displays a message on the screen for a short duration
+    public void DisplayMessage(string message)
+    {
+        
+        if (Message != null)
+        {
+            Message.text = message;
+        }
+        if (MessageBackground != null)
+        {
+            MessageBackground.gameObject.SetActive(true);
+        }
+        Invoke("HideMessage", 2f); // Hide the message after 2 seconds
+    }
+        
+    void Start()
     {
         UpdateInventoryUI();
         for (int i = 0; i <= 5; i++)
         {
             NewImage(emptySprite, i + 1);
         }
+        HideMessage(); // Ensure the message is hidden at the start
     }
 
 }

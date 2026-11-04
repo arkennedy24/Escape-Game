@@ -11,6 +11,7 @@ TagManager:
   - Cheese
   - BlackLight
   - Square
+  - AreaofInterest
   layers:
   - Default
   - TransparentFX

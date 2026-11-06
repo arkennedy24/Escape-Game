@@ -6,34 +6,68 @@ public class ButtonManager : MonoBehaviour
 {
     [SerializeField] Button rightButton;
     [SerializeField] Button leftButton;
-    [SerializeField] GameObject frontWall;
-    [SerializeField] GameObject rightWall;
+    [SerializeField] int currentWall;
+    [SerializeReference] GameObject[] walls;
+
+    // Values for Wall panels:
+    // Front Wall = 0
+    // Right Wall = 1
+    // Back Wall = 2
+    // Left Wall = 3
 
     void Start()
     {
         rightButton.onClick.AddListener(RightButtonClick);
         leftButton.onClick.AddListener(LeftButtonClick);
+
+        currentWall = 0;
+        for (int i = 0; i <= walls.Length-1; i++)
+        {
+            Debug.Log(i);
+            walls[i].SetActive(false);
+        }
+
+        walls[currentWall].SetActive(true);
     }
 
     void RightButtonClick()
     {
-        if (frontWall.activeInHierarchy)
+        currentWall += 1;
+
+        if (currentWall == 4)
         {
-            frontWall.SetActive(false);
-            rightWall.SetActive(true);
+            currentWall = 0;
         }
 
+        for (int i = 0; i <= walls.Length-1; i++)
+        {
+            Debug.Log(i);
+            walls[i].SetActive(false);
+        }
+
+        walls[currentWall].SetActive(true);
+
     }
-            
+
     void LeftButtonClick()
     {
-        if (rightWall.activeInHierarchy)
+        currentWall -= 1;
+
+        if (currentWall == -1)
         {
-            frontWall.SetActive(true);
-            rightWall.SetActive(false);
+            currentWall = 3;
         }
+
+        for (int i = 0; i <= walls.Length - 1; i++)
+        {
+            Debug.Log(i);
+            walls[i].SetActive(false);
+        }
+
+        walls[currentWall].SetActive(true);
+
     }
 }
 
-// NOTE: make an empty GameObject (named "ButtonManager", etc.), and attach this script to it, choose your buttons and panels in Inspector
-// Mecca note to self - figure out how to go back to Wall 1 later + add other Walls/panels soon lol
+// NOTE: make an empty GameObject (named "ButtonManager", etc.), and attach this script to it, assign walls to array list in inspector
+// See values for panels @ top of script

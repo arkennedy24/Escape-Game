@@ -87,6 +87,7 @@ public class ZoomInScript : MonoBehaviour
                 cameraTransform.position = targetPosition;
                 // Debug.Log("Zoom in complete");
                 zoomOutComplete = true;
+                areaOfInterestButton = null;
             }
         }
     }

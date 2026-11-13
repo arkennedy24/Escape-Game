@@ -18,6 +18,7 @@ public class PiecesManager : MonoBehaviour
         {
             Debug.Log(Puzzle_PiecesSprites[i]);
             Puzzle_PiecesSprites[i].SetActive(false);
+            Debug.Log(Puzzle_PiecesSprites[i].name + "Puzzle Piece " + i + " is set to inactive.");
         }
     }
 

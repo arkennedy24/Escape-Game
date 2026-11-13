@@ -19,21 +19,6 @@ public class InventoryManager : MonoBehaviour
     public PuzzleManager puzzleManager;
     public ZoomInScript zoomInScript;
 
-
-    [System.Serializable]
-    // Custom class to represent an inventory item
-    public class InventoryItem
-    {
-        public string itemName;
-        public int quantity;
-
-        // A constructor makes it easy to add items via code
-        public InventoryItem(string name, int amount)
-        {
-            itemName = name;
-            quantity = amount;
-        }
-    }
     
     // Create the list using custom class
     public List<InventoryItem> inventory = new();
@@ -108,6 +93,16 @@ public class InventoryManager : MonoBehaviour
         }
 
         string areaName = zoomInScript.areaOfInterestButton.name;
+
+
+
+        // puzzleManager.puzzles
+        
+        // Puzzle matchingPuzzle<List> = puzzleManager.puzzles.Find(puzzle =>
+        //     puzzle != null &&
+        //     puzzle.PuzzleName == areaName &&
+        //     puzzle.PuzzlePieceName == selectedItem.itemName);
+
         Puzzle matchingPuzzle = puzzleManager.puzzles.Find(puzzle =>
             puzzle != null &&
             puzzle.PuzzleName == areaName &&
@@ -115,10 +110,18 @@ public class InventoryManager : MonoBehaviour
 
         if (matchingPuzzle == null)
         {
+            Debug.Log("No matching puzzle found for area: " + areaName + " and item: " + selectedItem.itemName);
+            Debug.Log("Available puzzles:");
+            foreach (Puzzle puzzle in puzzleManager.puzzles)
+            {
+                Debug.Log("Puzzle Name: " + puzzle.PuzzleName + ", Puzzle Piece Name: " + puzzle.PuzzlePieceName);
+            }
             DisplayMessage("Item cannot be used here");
             Debug.Log("Item does not match the selected puzzle area");
             return;
         }
+
+
 
         Debug.Log("Using puzzle piece: " + selectedItem.itemName);
         puzzleManager.PlacePuzzlePiece(matchingPuzzle, GetSpriteForItem(selectedItem.itemName));

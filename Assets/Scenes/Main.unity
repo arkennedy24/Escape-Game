@@ -766,7 +766,7 @@ GameObject:
   - component: {fileID: 242964102}
   - component: {fileID: 242964101}
   - component: {fileID: 242964100}
-  - component: {fileID: 242964099}
+  - component: {fileID: 242964104}
   m_Layer: 5
   m_Name: MouseHole
   m_TagString: AreaofInterest
@@ -794,20 +794,6 @@ RectTransform:
   m_AnchoredPosition: {x: 386, y: -246}
   m_SizeDelta: {x: -1120, y: -629.64636}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &242964099
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 242964097}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c63b42cbf8328840855ad91f85cbdb1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PiecesManager
-  Puzzle_PiecesSprites:
-  - {fileID: 1038583795}
 --- !u!114 &242964100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -916,6 +902,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 242964097}
   m_CullTransparentMesh: 1
+--- !u!114 &242964104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 242964097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c63b42cbf8328840855ad91f85cbdb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PiecesManager
+  Puzzle_PiecesSprites:
+  - {fileID: 1038583795}
 --- !u!1 &266747685
 GameObject:
   m_ObjectHideFlags: 0
@@ -5603,7 +5603,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PuzzleManager
   puzzles: []
-  piecesManager: {fileID: 300941818}
+  piecesManagers:
+  - {fileID: 300941818}
+  - {fileID: 0}
   inventoryManager: {fileID: 1328069086}
   allPuzzlesSolved: 0
 --- !u!1 &1356700673

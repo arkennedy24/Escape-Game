@@ -9,6 +9,7 @@ public class Puzzle
         [SerializeField] int puzzlePieceAmount;
         [SerializeField] bool puzzleIsSolved;
         [SerializeField] int piecesPlaced;
+        
 
         // A constructor makes it easy to add items via code
         public Puzzle(string name, string pieceName, int amountOfPieces, bool isSolved)

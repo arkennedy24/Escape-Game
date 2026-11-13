@@ -103,30 +103,32 @@ public class InventoryManager : MonoBehaviour
         //     puzzle.PuzzleName == areaName &&
         //     puzzle.PuzzlePieceName == selectedItem.itemName);
 
-        Puzzle matchingPuzzle = puzzleManager.puzzles.Find(puzzle =>
-            puzzle != null &&
-            puzzle.PuzzleName == areaName &&
-            puzzle.PuzzlePieceName == selectedItem.itemName);
+        // Puzzle matchingPuzzle = puzzleManager.puzzles.Find(puzzle =>
+        //     puzzle != null &&
+        //     puzzle.PuzzleName == areaName &&
+        //     puzzle.PuzzlePieceName == selectedItem.itemName);
 
-        if (matchingPuzzle == null)
-        {
-            Debug.Log("No matching puzzle found for area: " + areaName + " and item: " + selectedItem.itemName);
-            Debug.Log("Available puzzles:");
-            foreach (Puzzle puzzle in puzzleManager.puzzles)
-            {
-                Debug.Log("Puzzle Name: " + puzzle.PuzzleName + ", Puzzle Piece Name: " + puzzle.PuzzlePieceName);
-            }
-            DisplayMessage("Item cannot be used here");
-            Debug.Log("Item does not match the selected puzzle area");
-            return;
-        }
+        // if (matchingPuzzle == null)
+        // {
+        //     Debug.Log("No matching puzzle found for area: " + areaName + " and item: " + selectedItem.itemName);
+        //     Debug.Log("Available puzzles:");
+        //     foreach (Puzzle puzzle in puzzleManager.puzzles)
+        //     {
+        //         Debug.Log("Puzzle Name: " + puzzle.PuzzleName + ", Puzzle Piece Name: " + puzzle.PuzzlePieceName);
+        //     }
+        //     DisplayMessage("Item cannot be used here");
+        //     Debug.Log("Item does not match the selected puzzle area");
+        //     return;
+        // }
 
-
-
-        Debug.Log("Using puzzle piece: " + selectedItem.itemName);
-        puzzleManager.PlacePuzzlePiece(matchingPuzzle, GetSpriteForItem(selectedItem.itemName));
+        puzzleManager.TryToUsePuzzlePiece(puzzleManager.GetPuzzleByName(areaName), selectedItem.itemName); 
         RemoveItem(selectedItem.itemName);
-        puzzleManager.UpdatePuzzle(matchingPuzzle);
+
+
+        // Debug.Log("Using puzzle piece: " + selectedItem.itemName);
+        // puzzleManager.PlacePuzzlePiece(matchingPuzzle, GetSpriteForItem(selectedItem.itemName));
+        // RemoveItem(selectedItem.itemName);
+        // puzzleManager.UpdatePuzzle(matchingPuzzle);
     }
 
     // Handles the removal of an item from the inventory

@@ -8,7 +8,7 @@ public class PuzzleManager : MonoBehaviour
     public List<Puzzle> puzzles = new();
     // public InventoryManager inventoryManager;
     //  public Sprite[] Puzzle_PiecesSprites;
-    public PiecesManager piecesManager;
+    public PiecesManager[] piecesManagers;
     public InventoryManager inventoryManager;
     public bool allPuzzlesSolved;
 
@@ -37,13 +37,17 @@ public class PuzzleManager : MonoBehaviour
     {
         return puzzle.PuzzleIsSolved;
     }
+
+
     public void UpdatePuzzle(Puzzle puzzle)
     {
         if (puzzle.PiecesPlaced >= puzzle.PuzzlePieceAmount)
         {
             puzzle.PuzzleIsSolved = true;
         }
-        piecesManager.ActivatePiece(puzzle.PiecesPlaced - 1);
+        Debug.Log("updating puzzle: " + puzzle.PuzzleName + ", Index: " + GetPuzzleIndex(puzzle));
+        piecesManagers[GetPuzzleIndex(puzzle)].ActivatePiece(puzzle.PiecesPlaced - 1);
+        
         if (puzzle.PuzzleIsSolved)
         {
             Debug.Log("Puzzle solved!");
@@ -72,7 +76,59 @@ public class PuzzleManager : MonoBehaviour
         }
     }
 
+    public void TryToUsePuzzlePiece(Puzzle puzzle, string itemName)
+    {
+        if (puzzle.PuzzlePieceName == itemName)
+        {
+            PlacePuzzlePiece(puzzle, null);
+            UpdatePuzzle(puzzle);
+            Debug.Log("Puzzle piece used successfully: " + itemName + " for puzzle: " + puzzle.PuzzleName);
+        }
+        else
+        {
+            Debug.Log("Item does not match the selected puzzle area");
+            inventoryManager.DisplayMessage("Item cannot be used here");
+        }
+    }
 
+    public int GetPuzzleIndex(Puzzle puzzle)
+    {
+        return puzzles.IndexOf(puzzle);
+    }
+    public int GetPuzzleIndexByName(string puzzleName)
+    {
+        for (int i = 0; i < puzzles.Count; i++)
+        {
+            if (puzzles[i].PuzzleName == puzzleName)
+            {
+                return i;
+            }
+        }
+        return -1; // Return -1 if the puzzle is not found
+    }
+    public Puzzle GetPuzzleByName(string puzzleName)
+    {
+        foreach (Puzzle puzzle in puzzles)
+        {
+            if (puzzle.PuzzleName == puzzleName)
+            {
+                return puzzle;
+            }
+        }
+        return null; // Return null if the puzzle is not found
+    }
+    
+    public bool CheckAllPuzzlesSolved()
+    {
+        foreach (Puzzle puzzle in puzzles)
+        {
+            if (!puzzle.PuzzleIsSolved)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
     
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

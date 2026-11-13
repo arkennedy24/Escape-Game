@@ -1,5 +1,7 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
+
 
 public class CountDown : MonoBehaviour
 {
@@ -24,5 +26,11 @@ public class CountDown : MonoBehaviour
 
         // Formats the string to always display 2 digits for mins and secs (00:00)
         countdownText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        if (countdownTime <= 0f)
+        {
+            countdownText.text = "00:00";
+             SceneManager.LoadScene("LooseScene");
+        }
     }
+
 }

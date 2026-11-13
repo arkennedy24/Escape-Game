@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+
 // InventoryManager handles the inventory system, including collecting, using, and removing items, and updating the UI accordingly.
 
 public class InventoryManager : MonoBehaviour
@@ -15,6 +16,9 @@ public class InventoryManager : MonoBehaviour
     public Sprite emptySprite;
     public TMP_Text Message;
     public Image MessageBackground;
+    public PuzzleManager puzzleManager;
+    public ZoomInScript zoomInScript;
+
 
     [System.Serializable]
     // Custom class to represent an inventory item
@@ -78,29 +82,48 @@ public class InventoryManager : MonoBehaviour
     // Handles the use of an item from the inventory
     public void ItemUse()
     {
-        
-        Debug.Log("Button name: " + ButtonName());
-        int itemIndex = int.Parse(ButtonName());
-        if (inventory.Count < itemIndex)
+        string buttonName = ButtonName();
+        Debug.Log("Button name: " + buttonName);
+        if (!int.TryParse(buttonName, out int itemIndex) || itemIndex < 1 || itemIndex > inventory.Count)
         {
             DisplayMessage("No item found");
             Debug.Log("Item index out of range");
             return;
         }
-        else if (inventory[itemIndex - 1].quantity <= 0 || inventory[itemIndex - 1] == null)
+
+        InventoryItem selectedItem = inventory[itemIndex - 1];
+        if (selectedItem == null || selectedItem.quantity <= 0)
         {
             DisplayMessage("Item is out of stock or null");
             Debug.Log("Item is out of stock or null");
             return;
         }
-        else {
-            Debug.Log("Item is valid and can be used");
-            Debug.Log("Using item at index: " + itemIndex);
-            Debug.Log("Item name: " + inventory[itemIndex - 1].itemName);
-            Debug.Log(inventory[itemIndex - 1].itemName + " used");
-             RemoveItem(inventory[itemIndex - 1].itemName);
-            UpdateInventoryUI();
+
+        if (puzzleManager == null || zoomInScript == null || zoomInScript.areaOfInterestButton == null)
+        {
+            DisplayMessage("No puzzle area selected");
+            Debug.Log("Puzzle manager or zoom area is not assigned");
+            Debug.Log("Puzzle manager: " + (puzzleManager != null) + ", Zoom in script: " + (zoomInScript != null) + ", Area of interest button: " + (zoomInScript?.areaOfInterestButton != null));
+            return;
         }
+
+        string areaName = zoomInScript.areaOfInterestButton.name;
+        Puzzle matchingPuzzle = puzzleManager.puzzles.Find(puzzle =>
+            puzzle != null &&
+            puzzle.PuzzleName == areaName &&
+            puzzle.PuzzlePieceName == selectedItem.itemName);
+
+        if (matchingPuzzle == null)
+        {
+            DisplayMessage("Item cannot be used here");
+            Debug.Log("Item does not match the selected puzzle area");
+            return;
+        }
+
+        Debug.Log("Using puzzle piece: " + selectedItem.itemName);
+        puzzleManager.PlacePuzzlePiece(matchingPuzzle, GetSpriteForItem(selectedItem.itemName));
+        RemoveItem(selectedItem.itemName);
+        puzzleManager.UpdatePuzzle(matchingPuzzle);
     }
 
     // Handles the removal of an item from the inventory
@@ -223,7 +246,7 @@ public class InventoryManager : MonoBehaviour
         {
             MessageBackground.gameObject.SetActive(true);
         }
-        Invoke("HideMessage", 2f); // Hide the message after 2 seconds
+        Invoke("HideMessage", 2.5f); // Hide the message after 2.5 seconds
     }
         
     void Start()

@@ -9,7 +9,7 @@ public class ZoomInScript : MonoBehaviour
 {
     public float zoomSpeed = 5f;
     public Camera mainCamera;
-    private Button areaOfInterestButton;
+    public Button areaOfInterestButton;
     // public float zoomDistance = 5f;
     public Transform cameraTransform;
     private Vector3 origionalPosition;
@@ -20,6 +20,8 @@ public class ZoomInScript : MonoBehaviour
     private float origionalSize;
     public float targetSize = 75f;
     public AreaOfInterestManager[] areaOfInterestManager;
+    public string AreaName;
+    
     [SerializeField] InventoryManager inventoryManager;
 
     // Calls the zoom-in functionality when an area of interest is clicked
@@ -36,8 +38,10 @@ public class ZoomInScript : MonoBehaviour
     // Zooms in to the selected area of interest and activates interactive elements within that area
     private void ZoomIn()
     {
-        zoomOutButton.gameObject.SetActive(true);
-        Debug.Log("Starting zoom in");
+        
+        AreaName = areaOfInterestButton.name;
+        // zoomOutButton.gameObject.SetActive(true);
+        // Debug.Log("Starting zoom in");
         targetPosition = new Vector3(areaOfInterestButton.transform.position.x, areaOfInterestButton.transform.position.y, origionalPosition.z);
         if (!zoomInComplete && areaOfInterestButton != null)
         {
@@ -54,6 +58,10 @@ public class ZoomInScript : MonoBehaviour
                 cameraTransform.position = targetPosition;
             }
         }
+        if (zoomInComplete)
+        {
+            zoomOutButton.gameObject.SetActive(true);
+        }
     }
 
     // Calls the zoom-out functionality when an area of interest is clicked
@@ -68,7 +76,7 @@ public class ZoomInScript : MonoBehaviour
     {
         zoomOutButton.gameObject.SetActive(false);
         areaOfInterestButton.GetComponent<AreaOfInterestManager>().DeactivateArea();
-        Debug.Log("Starting zoom out");
+        // Debug.Log("Starting zoom out");
         targetPosition = new Vector3(origionalPosition.x, origionalPosition.y, origionalPosition.z);
         if (!zoomOutComplete)
         {
@@ -99,15 +107,15 @@ public class ZoomInScript : MonoBehaviour
     {
         if(zoomInComplete == false)
         {
-            Debug.Log("Zooming in");
+            // Debug.Log("Zooming in");
             ZoomIn();
-            Debug.Log("zoom in complete: " + zoomInComplete);
+            // Debug.Log("zoom in complete: " + zoomInComplete);
         }
         if(zoomOutComplete == false)
         {
-            Debug.Log("Zooming out");
+            // Debug.Log("Zooming out");
             ZoomOut();
-            Debug.Log("zoom out complete: " + zoomOutComplete);
+            // Debug.Log("zoom out complete: " + zoomOutComplete);
         }
 
        

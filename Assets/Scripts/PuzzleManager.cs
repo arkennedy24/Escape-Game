@@ -41,13 +41,30 @@ public class PuzzleManager : MonoBehaviour
 
     public void UpdatePuzzle(Puzzle puzzle)
     {
+        foreach (Puzzle p in puzzles)
+        {
+            Debug.Log("Puzzle Name: " + p.PuzzleName + ", Pieces Placed: " + p.PiecesPlaced + ", Is Solved: " + p.PuzzleIsSolved);
+        }
+        Debug.Log("Updating all puzzle pieces should run next");
+        Debug.Log("puzzles.count: " + puzzles.Count);
+
+        //I Think this is where the code is breaking
+        for (int i = 0; i < puzzles.Count; i++)
+        {
+            Debug.Log("Updating pieces for puzzle: " + puzzles[i].PuzzleName + ", Pieces Placed: " + puzzles[i].PiecesPlaced);
+
+            // Figure out why this is Null???
+            Debug.Log(piecesManagers[i]);
+            piecesManagers[i].UpdateAllPieces(puzzles[i].PiecesPlaced);
+        }
         if (puzzle.PiecesPlaced >= puzzle.PuzzlePieceAmount)
         {
             puzzle.PuzzleIsSolved = true;
         }
         Debug.Log("updating puzzle: " + puzzle.PuzzleName + ", Index: " + GetPuzzleIndex(puzzle));
-        piecesManagers[GetPuzzleIndex(puzzle)].ActivatePiece(puzzle.PiecesPlaced - 1);
+        // piecesManagers[GetPuzzleIndex(puzzle)].ActivatePiece(puzzle.PiecesPlaced - 1);
         
+
         if (puzzle.PuzzleIsSolved)
         {
             Debug.Log("Puzzle solved!");
@@ -89,6 +106,11 @@ public class PuzzleManager : MonoBehaviour
             Debug.Log("Item does not match the selected puzzle area");
             inventoryManager.DisplayMessage("Item cannot be used here");
         }
+    }
+    public bool CanUsePuzzlePiece(Puzzle puzzle, string itemName)
+    {
+        Debug.Log("Checking if puzzle piece can be used: " + itemName + " for puzzle: " + puzzle.PuzzleName + ". Puzzle piece name: " + puzzle.PuzzlePieceName);
+        return puzzle.PuzzlePieceName == itemName;
     }
 
     public int GetPuzzleIndex(Puzzle puzzle)

@@ -10,6 +10,17 @@ public class PiecesManager : MonoBehaviour
              Puzzle_PiecesSprites[index].SetActive(true);
          }
      }
+     public void UpdateAllPieces(int piecesPlaced)
+     {
+        Debug.Log("Updating all pieces with piecesPlaced: " + piecesPlaced);
+         for (int i = 0; i < Puzzle_PiecesSprites.Length; i++)
+         {
+            Debug.Log("Checking piece " + i + " against piecesPlaced: " + piecesPlaced);
+            if (i < piecesPlaced){
+             Puzzle_PiecesSprites[i].SetActive(true);
+            }
+         }
+     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

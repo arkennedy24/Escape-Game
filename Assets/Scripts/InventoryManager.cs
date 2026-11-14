@@ -84,7 +84,7 @@ public class InventoryManager : MonoBehaviour
             return;
         }
 
-        if (puzzleManager == null || zoomInScript == null || zoomInScript.areaOfInterestButton == null)
+        else if (puzzleManager == null || zoomInScript == null || zoomInScript.areaOfInterestButton == null)
         {
             DisplayMessage("No puzzle area selected");
             Debug.Log("Puzzle manager or zoom area is not assigned");
@@ -92,8 +92,7 @@ public class InventoryManager : MonoBehaviour
             return;
         }
 
-        string areaName = zoomInScript.areaOfInterestButton.name;
-
+        
 
 
         // puzzleManager.puzzles
@@ -120,10 +119,23 @@ public class InventoryManager : MonoBehaviour
         //     Debug.Log("Item does not match the selected puzzle area");
         //     return;
         // }
-
-        puzzleManager.TryToUsePuzzlePiece(puzzleManager.GetPuzzleByName(areaName), selectedItem.itemName); 
-        RemoveItem(selectedItem.itemName);
-
+        else
+        {
+            string areaName = zoomInScript.areaOfInterestButton.name;
+             
+           if(puzzleManager.CanUsePuzzlePiece(puzzleManager.GetPuzzleByName(areaName), selectedItem.itemName)) 
+           {
+            RemoveItem(selectedItem.itemName);
+            puzzleManager.TryToUsePuzzlePiece(puzzleManager.GetPuzzleByName(areaName), selectedItem.itemName);
+            Debug.Log("Puzzle piece used successfully: " + selectedItem.itemName);
+            
+           }
+           else
+           {
+               DisplayMessage("Item cannot be used here");
+               Debug.Log("Item does not match the selected puzzle area");
+           }
+        }
 
         // Debug.Log("Using puzzle piece: " + selectedItem.itemName);
         // puzzleManager.PlacePuzzlePiece(matchingPuzzle, GetSpriteForItem(selectedItem.itemName));

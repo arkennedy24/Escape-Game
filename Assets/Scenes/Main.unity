@@ -4449,7 +4449,7 @@ GameObject:
   - component: {fileID: 1051906905}
   - component: {fileID: 1051906904}
   m_Layer: 5
-  m_Name: JigSawPiece
+  m_Name: Puzzle Piece
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5605,7 +5605,7 @@ MonoBehaviour:
   puzzles: []
   piecesManagers:
   - {fileID: 300941818}
-  - {fileID: 0}
+  - {fileID: 242964104}
   inventoryManager: {fileID: 1328069086}
   allPuzzlesSolved: 0
 --- !u!1 &1356700673

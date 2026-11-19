@@ -18,10 +18,8 @@ public class InventoryManager : MonoBehaviour
     public Image MessageBackground;
     public PuzzleManager puzzleManager;
     public ZoomInScript zoomInScript;
-
-    
-    // Create the list using custom class
     public List<InventoryItem> inventory = new();
+
 
     // Handles the collection of an item and updates the inventory accordingly
     public void ItemCollect()
@@ -64,6 +62,7 @@ public class InventoryManager : MonoBehaviour
         
     }
 
+
     // Handles the use of an item from the inventory
     public void ItemUse()
     {
@@ -75,7 +74,6 @@ public class InventoryManager : MonoBehaviour
             Debug.Log("Item index out of range");
             return;
         }
-
         InventoryItem selectedItem = inventory[itemIndex - 1];
         if (selectedItem == null || selectedItem.quantity <= 0)
         {
@@ -83,7 +81,6 @@ public class InventoryManager : MonoBehaviour
             Debug.Log("Item is out of stock or null");
             return;
         }
-
         else if (puzzleManager == null || zoomInScript == null || zoomInScript.areaOfInterestButton == null)
         {
             DisplayMessage("No puzzle area selected");
@@ -91,34 +88,6 @@ public class InventoryManager : MonoBehaviour
             Debug.Log("Puzzle manager: " + (puzzleManager != null) + ", Zoom in script: " + (zoomInScript != null) + ", Area of interest button: " + (zoomInScript?.areaOfInterestButton != null));
             return;
         }
-
-        
-
-
-        // puzzleManager.puzzles
-        
-        // Puzzle matchingPuzzle<List> = puzzleManager.puzzles.Find(puzzle =>
-        //     puzzle != null &&
-        //     puzzle.PuzzleName == areaName &&
-        //     puzzle.PuzzlePieceName == selectedItem.itemName);
-
-        // Puzzle matchingPuzzle = puzzleManager.puzzles.Find(puzzle =>
-        //     puzzle != null &&
-        //     puzzle.PuzzleName == areaName &&
-        //     puzzle.PuzzlePieceName == selectedItem.itemName);
-
-        // if (matchingPuzzle == null)
-        // {
-        //     Debug.Log("No matching puzzle found for area: " + areaName + " and item: " + selectedItem.itemName);
-        //     Debug.Log("Available puzzles:");
-        //     foreach (Puzzle puzzle in puzzleManager.puzzles)
-        //     {
-        //         Debug.Log("Puzzle Name: " + puzzle.PuzzleName + ", Puzzle Piece Name: " + puzzle.PuzzlePieceName);
-        //     }
-        //     DisplayMessage("Item cannot be used here");
-        //     Debug.Log("Item does not match the selected puzzle area");
-        //     return;
-        // }
         else
         {
             string areaName = zoomInScript.areaOfInterestButton.name;
@@ -136,12 +105,8 @@ public class InventoryManager : MonoBehaviour
                Debug.Log("Item does not match the selected puzzle area");
            }
         }
-
-        // Debug.Log("Using puzzle piece: " + selectedItem.itemName);
-        // puzzleManager.PlacePuzzlePiece(matchingPuzzle, GetSpriteForItem(selectedItem.itemName));
-        // RemoveItem(selectedItem.itemName);
-        // puzzleManager.UpdatePuzzle(matchingPuzzle);
     }
+
 
     // Handles the removal of an item from the inventory
     public void RemoveItem(string name)
@@ -158,6 +123,7 @@ public class InventoryManager : MonoBehaviour
         UpdateInventoryUI();
     }
     
+
     // Updates the inventory UI based on the current inventory contents
     public void UpdateInventoryUI()
     {
@@ -168,6 +134,7 @@ public class InventoryManager : MonoBehaviour
             NewImage(inventory.Count > i ? GetSpriteForItem(inventory[i].itemName) : emptySprite, i + 1);
         }
     }
+
 
     // Helper method to get the sprite for a specific item name
     public Sprite GetSpriteForItem(string itemName)
@@ -182,6 +149,7 @@ public class InventoryManager : MonoBehaviour
         return null;
     }
 
+
     // Turns off the item that was clicked
     public void TurnOffItem()
     {
@@ -194,7 +162,8 @@ public class InventoryManager : MonoBehaviour
         // }
     }
 
-// Helper method to get the tag of the button that was clicked
+
+    // Helper method to get the tag of the button that was clicked
     public string ButtonTag()
         {
             // Automatically fetches the name of the button that was clicked
@@ -202,6 +171,7 @@ public class InventoryManager : MonoBehaviour
             return clickedButton != null ? clickedButton.tag : string.Empty;
         }
     
+
     // Helper method to get the name of the button that was clicked
     public string ButtonName()
     {
@@ -209,11 +179,13 @@ public class InventoryManager : MonoBehaviour
         return clickedButton != null ? clickedButton.name : string.Empty;
     }
 
+
     // Updates the image in a specific inventory slot
     public void NewImage(Sprite sprite, int slotIndex)
     {
         Inventory_Slot_Icons[slotIndex - 1].sprite = sprite;
     }
+
 
     // adding/stacking items
     public void AddItem(string name, int amount)
@@ -233,6 +205,7 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
+
     // Helper method to print the inventory to the console
     void PrintInventory()
     {
@@ -241,6 +214,7 @@ public class InventoryManager : MonoBehaviour
             Debug.Log($"Item: {item.itemName} | Quantity: {item.quantity}");
         }
     }
+
 
     // Hides the message on the screen
     public void HideMessage()
@@ -251,6 +225,7 @@ public class InventoryManager : MonoBehaviour
         }
     }
     
+
     // Displays a message on the screen for a short duration
     public void DisplayMessage(string message)
     {
@@ -265,7 +240,8 @@ public class InventoryManager : MonoBehaviour
         }
         Invoke("HideMessage", 2.5f); // Hide the message after 2.5 seconds
     }
-        
+
+
     void Start()
     {
         UpdateInventoryUI();

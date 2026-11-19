@@ -1,8 +1,13 @@
 using UnityEngine;
 
+// PiecesManager handles the management of puzzle pieces, including activating and updating their visibility based on the number of pieces placed in a puzzle.
+
 public class PiecesManager : MonoBehaviour
 {
      [SerializeField] GameObject[] Puzzle_PiecesSprites;
+
+
+     // Activates the puzzle piece at the specified index
      public void ActivatePiece(int index)
      {
          if (index >= 0 && index < Puzzle_PiecesSprites.Length)
@@ -10,6 +15,9 @@ public class PiecesManager : MonoBehaviour
              Puzzle_PiecesSprites[index].SetActive(true);
          }
      }
+
+
+     // Updates the visibility of all puzzle pieces based on the number of pieces placed
      public void UpdateAllPieces(int piecesPlaced)
      {
         Debug.Log("Updating all pieces with piecesPlaced: " + piecesPlaced);
@@ -33,9 +41,4 @@ public class PiecesManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

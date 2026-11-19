@@ -2,29 +2,25 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
+// PuzzleManager handles the management of puzzles, including placing puzzle pieces, updating puzzle states, and checking if all puzzles are solved.
 
 public class PuzzleManager : MonoBehaviour
 {
     public List<Puzzle> puzzles = new();
-    // public InventoryManager inventoryManager;
-    //  public Sprite[] Puzzle_PiecesSprites;
     public PiecesManager[] piecesManagers;
     public InventoryManager inventoryManager;
     public bool allPuzzlesSolved;
 
+
+// Initializes the puzzles with their names, piece names, and the number of pieces required to solve them
     public void InitializePuzzles()
     {
-        puzzles.Add(new Puzzle("MouseHole", "Cheese", 1, false));
         puzzles.Add(new Puzzle("JigSaw", "Puzzle Piece", 3, false));
-        // foreach (Puzzle puzzle in puzzles)
-        // {
-
-        //     Debug.Log("Puzzle Name: " + puzzle.PuzzleName);
-        //     Debug.Log("Puzzle Piece Name: " + puzzle.PuzzlePieceName);
-        //     Debug.Log("Puzzle Piece Amount: " + puzzle.PuzzlePieceAmount);
-        //     Debug.Log("Puzzle Is Solved: " + puzzle.PuzzleIsSolved);
-        // }
+        puzzles.Add(new Puzzle("MouseHole", "Cheese", 1, false));
     }
+
+
+// Places a puzzle piece in the specified puzzle and updates the puzzle state
     public void PlacePuzzlePiece(Puzzle puzzle, Sprite pieceSprite)
     {
         puzzle.PiecesPlaced++;
@@ -33,12 +29,9 @@ public class PuzzleManager : MonoBehaviour
             puzzle.PuzzleIsSolved = true;
         }
     }
-    public bool IsPuzzleSolved(Puzzle puzzle)
-    {
-        return puzzle.PuzzleIsSolved;
-    }
 
 
+// Update the puzzle state and check if all puzzles are solved
     public void UpdatePuzzle(Puzzle puzzle)
     {
         foreach (Puzzle p in puzzles)
@@ -54,7 +47,7 @@ public class PuzzleManager : MonoBehaviour
             Debug.Log("Updating pieces for puzzle: " + puzzles[i].PuzzleName + ", Pieces Placed: " + puzzles[i].PiecesPlaced);
 
             // Figure out why this is Null???
-            Debug.Log(piecesManagers[i]);
+            Debug.Log("piecesManagers[i]" + piecesManagers[i]);
             piecesManagers[i].UpdateAllPieces(puzzles[i].PiecesPlaced);
         }
         if (puzzle.PiecesPlaced >= puzzle.PuzzlePieceAmount)
@@ -93,6 +86,7 @@ public class PuzzleManager : MonoBehaviour
         }
     }
 
+// Tries to use a puzzle piece in the specified puzzle and updates the puzzle state if successful
     public void TryToUsePuzzlePiece(Puzzle puzzle, string itemName)
     {
         if (puzzle.PuzzlePieceName == itemName)
@@ -107,27 +101,24 @@ public class PuzzleManager : MonoBehaviour
             inventoryManager.DisplayMessage("Item cannot be used here");
         }
     }
+
+
+// Checks if a puzzle piece can be used in the specified puzzle
     public bool CanUsePuzzlePiece(Puzzle puzzle, string itemName)
     {
         Debug.Log("Checking if puzzle piece can be used: " + itemName + " for puzzle: " + puzzle.PuzzleName + ". Puzzle piece name: " + puzzle.PuzzlePieceName);
         return puzzle.PuzzlePieceName == itemName;
     }
 
+
+// Gets the index of the specified puzzle in the puzzles list
     public int GetPuzzleIndex(Puzzle puzzle)
     {
         return puzzles.IndexOf(puzzle);
     }
-    public int GetPuzzleIndexByName(string puzzleName)
-    {
-        for (int i = 0; i < puzzles.Count; i++)
-        {
-            if (puzzles[i].PuzzleName == puzzleName)
-            {
-                return i;
-            }
-        }
-        return -1; // Return -1 if the puzzle is not found
-    }
+
+
+// Gets the puzzle by its name from the puzzles list
     public Puzzle GetPuzzleByName(string puzzleName)
     {
         foreach (Puzzle puzzle in puzzles)
@@ -138,18 +129,6 @@ public class PuzzleManager : MonoBehaviour
             }
         }
         return null; // Return null if the puzzle is not found
-    }
-    
-    public bool CheckAllPuzzlesSolved()
-    {
-        foreach (Puzzle puzzle in puzzles)
-        {
-            if (!puzzle.PuzzleIsSolved)
-            {
-                return false;
-            }
-        }
-        return true;
     }
     
 

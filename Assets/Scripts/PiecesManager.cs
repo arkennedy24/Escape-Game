@@ -5,7 +5,7 @@ using UnityEngine;
 public class PiecesManager : MonoBehaviour
 {
      [SerializeField] GameObject[] Puzzle_PiecesSprites;
-
+    public string puzzleName; // Name of the puzzle associated with this PiecesManager
 
      // Activates the puzzle piece at the specified index
      public void ActivatePiece(int index)

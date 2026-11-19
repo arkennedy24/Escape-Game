@@ -40,6 +40,7 @@ public class PuzzleManager : MonoBehaviour
         }
         Debug.Log("Updating all puzzle pieces should run next");
         Debug.Log("puzzles.count: " + puzzles.Count);
+        
 
         //I Think this is where the code is breaking
         for (int i = 0; i < puzzles.Count; i++)
@@ -136,6 +137,7 @@ public class PuzzleManager : MonoBehaviour
     void Start()
     {
         InitializePuzzles();
+        
     }
 
 }

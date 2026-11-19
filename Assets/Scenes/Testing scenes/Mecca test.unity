@@ -2505,6 +2505,7 @@ GameObject:
   - component: {fileID: 623580485}
   - component: {fileID: 623580484}
   - component: {fileID: 623580483}
+  - component: {fileID: 623580488}
   m_Layer: 5
   m_Name: SettingsCanvas
   m_TagString: Untagged
@@ -2607,6 +2608,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &623580488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 623580482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7468e169304a5754aa217d0b95357c6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SettingsUIPanel
+  settingsPanel: {fileID: 1856847417}
 --- !u!1001 &650199168
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8891,7 +8905,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -26, y: -173}
+  m_AnchoredPosition: {x: -25.99997, y: -173}
   m_SizeDelta: {x: 1372.6089, y: 773.4017}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1823174376

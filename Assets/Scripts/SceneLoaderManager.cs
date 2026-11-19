@@ -26,8 +26,8 @@ public class SceneLoaderManager : MonoBehaviour
     // this is a temp. line, working in testing scene as of writing this
     public void LoadCurrentScene()
     {
-        SceneManager.GetActiveScene();
-        Debug.Log("loading active scene");
+        SceneManager.LoadScene("Mecca test");
+        Debug.Log("loading testing scene");
 
     }
 }

@@ -7,7 +7,7 @@ using UnityEngine.UI;
 //drag areas of interest into the areaOfInterestManager array in the inspector
 public class ZoomInScript : MonoBehaviour
 {
-    public float zoomSpeed = 5f;
+    public float zoomSpeed = 15f;
     public Camera mainCamera;
     public Button areaOfInterestButton;
     // public float zoomDistance = 5f;
@@ -21,6 +21,7 @@ public class ZoomInScript : MonoBehaviour
     public float targetSize = 75f;
     public AreaOfInterestManager[] areaOfInterestManager;
     public string AreaName;
+    public Button[] arrowButtons;
     
     [SerializeField] InventoryManager inventoryManager;
 
@@ -38,7 +39,8 @@ public class ZoomInScript : MonoBehaviour
     // Zooms in to the selected area of interest and activates interactive elements within that area
     private void ZoomIn()
     {
-        
+        arrowButtons[0].gameObject.SetActive(false);
+        arrowButtons[1].gameObject.SetActive(false);
         AreaName = areaOfInterestButton.name;
         // zoomOutButton.gameObject.SetActive(true);
         // Debug.Log("Starting zoom in");
@@ -75,6 +77,8 @@ public class ZoomInScript : MonoBehaviour
     private void ZoomOut()
     {
         zoomOutButton.gameObject.SetActive(false);
+        arrowButtons[0].gameObject.SetActive(true);
+        arrowButtons[1].gameObject.SetActive(true);
         areaOfInterestButton.GetComponent<AreaOfInterestManager>().DeactivateArea();
         // Debug.Log("Starting zoom out");
         targetPosition = new Vector3(origionalPosition.x, origionalPosition.y, origionalPosition.z);

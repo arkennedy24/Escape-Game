@@ -22,4 +22,12 @@ public class SceneLoaderManager : MonoBehaviour
         Application.Quit();
         Debug.Log("Quitting game");
     }
+
+    // this is a temp. line, working in testing scene as of writing this
+    public void LoadCurrentScene()
+    {
+        SceneManager.LoadScene("Mecca test");
+        Debug.Log("loading testing scene");
+
+    }
 }

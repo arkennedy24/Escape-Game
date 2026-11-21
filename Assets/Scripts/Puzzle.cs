@@ -29,6 +29,7 @@ public class Puzzle
         get { return puzzleName; }
         set { puzzleName = value; }
     }
+    
 
         public string PuzzlePieceName
         {

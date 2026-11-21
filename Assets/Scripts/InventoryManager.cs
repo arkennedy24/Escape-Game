@@ -91,7 +91,13 @@ public class InventoryManager : MonoBehaviour
         else
         {
             string areaName = zoomInScript.areaOfInterestButton.name;
-             
+             Debug.Log("in esle loop in InventoryManager");
+            //  Debug.Log("Selected item: " + selectedItem.itemName);
+             Debug.Log("Area name: " + areaName);
+             Debug.Log("Puzzle manager: " + (puzzleManager != null) + ", Zoom in script: " + (zoomInScript != null) + ", Area of interest button: " + (zoomInScript?.areaOfInterestButton != null));
+             Debug.Log("CanUsePuzzlePiece result: " + puzzleManager.CanUsePuzzlePiece(puzzleManager.GetPuzzleByName(areaName), selectedItem.itemName));
+             Debug.Log("Puzzle name: " + puzzleManager.GetPuzzleByName(areaName));
+             Debug.Log(puzzleManager.CanUsePuzzlePiece(puzzleManager.GetPuzzleByName(areaName), selectedItem.itemName));
            if(puzzleManager.CanUsePuzzlePiece(puzzleManager.GetPuzzleByName(areaName), selectedItem.itemName)) 
            {
             RemoveItem(selectedItem.itemName);
@@ -141,7 +147,7 @@ public class InventoryManager : MonoBehaviour
     {
         for (int i = 0; i < Inventory_Slot_Sprites.Length; i++)
             {
-                if (Inventory_Slot_Sprites[i].name == itemName + "_0")
+                if (Inventory_Slot_Sprites[i].name == itemName + "_0" || Inventory_Slot_Sprites[i].name == itemName)
                 {
                     return Inventory_Slot_Sprites[i];
                 }

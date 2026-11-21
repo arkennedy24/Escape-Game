@@ -9,7 +9,23 @@ public class PuzzleManager : MonoBehaviour
     public List<Puzzle> puzzles = new();
     public PiecesManager[] piecesManagers;
     public InventoryManager inventoryManager;
+    public DoorScript doorManager;
+    public List<Door> doors;
     public bool allPuzzlesSolved;
+
+    private void Awake()
+    {
+        if (doorManager == null)
+        {
+            doorManager = GetComponent<DoorScript>();
+        }
+
+        if (doorManager != null)
+        {
+            doors = doorManager.doors;
+        }
+    }
+   
 
 
 // Initializes the puzzles with their names, piece names, and the number of pieces required to solve them
@@ -61,6 +77,22 @@ public class PuzzleManager : MonoBehaviour
 
         if (puzzle.PuzzleIsSolved)
         {
+            foreach (Door door in doors)
+            {
+                if (puzzle.PuzzleName == door.DoorObject.name)
+                {
+                    door.IsLocked = false;
+                    door.IsOpen = true;
+                    // door.DoorButton.GetComponent<Button>().image.sprite = door.OpenSprite;
+                    
+                    break;
+                }
+                // if (door.PuzzleSolved == false)
+                // {
+                //     door.PuzzleSolved = true;
+                //     break;
+                // }
+            }
             Debug.Log("Puzzle solved!");
             inventoryManager.DisplayMessage("Puzzle solved!");
             if (puzzle.HasCompletedAction)

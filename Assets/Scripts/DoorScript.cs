@@ -1,8 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class DoorScript : MonoBehaviour
 {
+    public List<Door> doors = new();
     [SerializeField] Sprite OpenSprite; // Assign the new sprite in the Inspector
     [SerializeField] Sprite ClosedSprite; // Assign the new sprite in the Inspector
     private bool isOpen = false; // Track the door's state

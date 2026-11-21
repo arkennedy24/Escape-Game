@@ -13,11 +13,11 @@ public class PuzzleManager : MonoBehaviour
 
 
 // Initializes the puzzles with their names, piece names, and the number of pieces required to solve them
-    public void InitializePuzzles()
-    {
-        puzzles.Add(new Puzzle("JigSaw", "Puzzle Piece", 3, false));
-        puzzles.Add(new Puzzle("MouseHole", "Cheese", 1, false));
-    }
+    // public void InitializePuzzles()
+    // {
+    //     puzzles.Add(new Puzzle("JigSaw", "Puzzle Piece", 4, false, false));
+    //     puzzles.Add(new Puzzle("MouseHole", "Cheese", 1, false, true));
+    // }
 
 
 // Places a puzzle piece in the specified puzzle and updates the puzzle state
@@ -63,6 +63,11 @@ public class PuzzleManager : MonoBehaviour
         {
             Debug.Log("Puzzle solved!");
             inventoryManager.DisplayMessage("Puzzle solved!");
+            if (puzzle.HasCompletedAction)
+            {
+                puzzle.CompleteAction(puzzle.CompletedActionObject);
+            }
+            
             for(int i = 0; i < puzzles.Count; i++)
             {
                 Debug.Log(puzzles[i].PuzzleName + ": " + puzzles[i].PuzzleIsSolved + "Checked");
@@ -134,10 +139,10 @@ public class PuzzleManager : MonoBehaviour
     
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        InitializePuzzles();
+    // void Start()
+    // {
+    //     InitializePuzzles();
         
-    }
+    // }
 
 }

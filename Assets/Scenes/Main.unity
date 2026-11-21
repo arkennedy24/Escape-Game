@@ -1799,7 +1799,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 404, y: 209}
+  m_AnchoredPosition: {x: 295.9911, y: -139}
   m_SizeDelta: {x: -1106.4417, y: -593.4905}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &300941818
@@ -3520,7 +3520,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 804612177462f9947ba896ab78cf84d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DoorScript
-  doors: []
+  OpenSprite: {fileID: -4839668329836896905, guid: 33f635a55ee0bbb45be00096f02ec13c, type: 3}
+  ClosedSprite: {fileID: 5157226881233323243, guid: 61128e1a97ea0684497f3efcc76b8ae4, type: 3}
 --- !u!114 &789106997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3855,98 +3856,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 816798923}
   m_CullTransparentMesh: 1
---- !u!1 &830837784
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 830837785}
-  - component: {fileID: 830837786}
-  m_Layer: 5
-  m_Name: Bed_0
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &830837785
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 830837784}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 810, y: 355, z: -0.02}
-  m_LocalScale: {x: 98.167, y: 98.167, z: 98.167}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1919512938}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &830837786
-SpriteRenderer:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 830837784}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_ForceMeshLod: -1
-  m_MeshLodSelectionBias: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_MaskInteraction: 0
-  m_Sprite: {fileID: 5167690650097798016, guid: 103d8be9dae7e804c9879b3a8c41bf0c, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 5.5, y: 4.46}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_SpriteSortPoint: 0
-  m_BlendShapeWeights: []
 --- !u!1 &847299141
 GameObject:
   m_ObjectHideFlags: 0
@@ -4436,7 +4345,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 943183295}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 1.6968}
   m_LocalScale: {x: 0.27445737, y: 0.27445737, z: 0.27445737}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4446,7 +4355,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -599, y: 280}
+  m_AnchoredPosition: {x: -464.23392, y: 317.82385}
   m_SizeDelta: {x: 266.16724, y: 179.20886}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &943183298
@@ -9925,10 +9834,9 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 830837785}
-  - {fileID: 943183297}
   - {fileID: 126826412}
   - {fileID: 1874808923}
+  - {fileID: 943183297}
   - {fileID: 300941817}
   m_Father: {fileID: 2027570404}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10579,7 +10487,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 804612177462f9947ba896ab78cf84d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DoorScript
-  doors: []
+  OpenSprite: {fileID: -8072765255684385407, guid: 407216f2370ca394c99e4020a6b946bd, type: 3}
+  ClosedSprite: {fileID: 3081445342113874545, guid: ea5d69aa67435fa40a7ae03f9f5f75c1, type: 3}
 --- !u!114 &1980647187
 MonoBehaviour:
   m_ObjectHideFlags: 0
